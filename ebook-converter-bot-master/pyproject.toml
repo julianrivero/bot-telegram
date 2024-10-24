@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "ebook-converter-bot"
+version = "0.1.0"
+description = "A Telegram bot for converting E-books."
+authors = ["yshalsager <ysh-alsager@hotmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Telethon = "^1.28.5"
+cryptg = "^0.4"
+hachoir = "^3.2.0"
+sqlalchemy = "^2.0.14"
+lxml = "^5.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.0.0"
+types-toml = "^0.10.8"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]  # https://github.com/charliermarsh/ruff
+fix = true
+ignore-init-module-imports = true
+line-length = 100
+select = ["A", "B", "BLE", "C4", "C90", "DTZ", "E", "ERA", "F", "G", "I", "INP", "ISC", "N", "NPY", "PGH", "PIE", "PLC", "PLE", "PLR", "PLW", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "S", "SIM", "T10", "T20", "TID", "UP", "W", "YTT"]
+ignore = ["E501", "PGH001", "RET504", "S101", "D211", "D213", "ERA001", "G004"]
+unfixable = ["ERA001", "F401", "F841", "T201", "T203"]
+src = ["ebook_converter_bot"]
+target-version = "py312"
+
+
+[tool.black]
+include = '(\.pyi?$)'
+exclude = '''
+/(
+    \.git
+  | __pycache__
+  | data/locales
+  | \.venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+files = ["ebook_converter_bot"]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+#disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+show_error_codes = true
+warn_unused_ignores = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = false
+plugins = ["sqlalchemy.ext.mypy.plugin"]
